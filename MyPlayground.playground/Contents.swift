@@ -137,3 +137,72 @@ do{
 } catch{
     print(error)
 }
+
+enum IphoneType{
+  case iPhoneAir
+  case iPhone17Pro
+  case iPhone17ProMax
+  case iPhone17
+}
+
+struct Iphone {
+  let supplier: String = "Apple"
+  var type: IphoneType?
+  var dimension: (height: Double, width: Double)
+  
+  var description : String {
+    guard let types = type else { return "onbekend"}
+    switch types {
+      case .iPhoneAir: return "iPhone air"
+      case .iPhone17: return "iPhone 17"
+      case .iPhone17Pro: return "iPhone 17 Pro"
+      case .iPhone17ProMax: return "iPhone 17 Pro Max"
+    }
+  }
+
+  init() {
+    self.type = nil
+    self.dimension = (height: 0.0, width: 0.0)
+  }
+
+  init(type: IphoneType, dimension: (height: Double, width: Double)) {
+    self.type = type
+    self.dimension = dimension
+  }
+}
+
+let iPhoneAir = Iphone()
+let iPhoneAir2 = Iphone(type: .iPhoneAir, dimension: (height: 15.62, width: 7.47))
+
+print(iPhoneAir.description)
+print(iPhoneAir2.description)
+
+
+
+let arr = ["Dirk", "Els", "Marc", "Eline", "Dominiek"]
+//let namenBeginnendMetD = arr.filter{arr in return arr.hasPrefix("D")}
+//print(namenBeginnendMetD)
+
+func filterArrExtended(letter: String) -> (String) -> Bool {
+  func filterArr(naam: String) -> Bool {
+    return naam.hasPrefix(letter)
+  }
+  return filterArr
+}
+
+//let filtered2 = arr.filter(filterArr)
+//print(filtered2)
+
+let filtered3 = arr.filter(filterArrExtended(letter: "M"))
+let filteredUpper = filtered3.map {
+  naam in naam.uppercased()
+}
+
+print(filteredUpper)
+
+let lengths = arr.map {
+  naam in naam.count
+}
+let sortedLengths = lengths.sorted()
+print(sortedLengths)
+
