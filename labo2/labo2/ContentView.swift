@@ -9,16 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-            Spacer()
-            Image(systemName: "airplane.circle")
-                .foregroundStyle(.tint)
+        TabView{
+            Tab("Departure", systemImage: "airplane.departure") {
+                FlightView()
+                //departureData tussen de haakjes
+            }
+            Tab("Info", systemImage: "info.bubble.fill.rtl") {
+                HomeView()
+            }
+            Tab("Arrival", systemImage: "airplane.arrival") {
+                FlightView()
+                //arrivalData
+            }
         }
-        .padding()
     }
 }
 
