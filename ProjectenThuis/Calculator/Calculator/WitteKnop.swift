@@ -8,13 +8,21 @@
 import SwiftUI
 
 struct WitteKnop: View {
+    
+    let titel : String
+    let actie : () -> Void
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct WitteKnop_Previews: PreviewProvider {
-    static var previews: some View {
-        WitteKnop()
+        Button(titel){
+            actie()
+        }
+        .foregroundColor(.black)
+        .padding()
+        .background(Color.white)
+        .cornerRadius(8)
+        .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.gray, lineWidth: 1)
+                )
     }
 }
