@@ -7,46 +7,37 @@
 
 import Foundation
 
-class CalcEngine{
-//    var result : String = "";
+class CalcEngine : ObservableObject{
+    @Published var result : String = "";
     var stack: [Double] = [];
     
     
-    func enterGetal (_ input: String) -> String{
+    func enterGetal (_ input: String){
         if let getal = Double(input){
             stack.append(getal)
-            return "\(getal)\n"
+            result += "\(getal)\n"
         }
-        return "ongeldig"
+        
     }
     
-//    func updateResult() {
-//        if let laatste = stack.last {
-//            result = String(laatste);
-//        }
-//    }
-//
-    func showStack() -> String{
-//        let stacklijn =
-        return "[" + stack.map { String($0) }.joined(separator: ", ") + "]"
-//        result += stacklijn + "\n" + result
+
+    func showStack() {
+        result += "[" + stack.map { String($0) }.joined(separator: ", ") + "]"
     }
     
-    func clear() -> String{
+    func clear(){
         stack.removeAll();
-//        result = "";
-        return ""
+        result = ""
     }
     
-    func voerBewerkingUit(_ bewerking : String) -> String{
+    func voerBewerkingUit(_ bewerking : String){
         
         guard
             let laatstIngevoerdeGetal = stack.popLast(),
             let voorlaatsteIngevoerdeGetal = stack.popLast()
         else {
-            return "Not enough operands...";
-//            result = "Not enough operand...\n" + result
-//            return
+            result = "Not enough operand...\n" + result
+            return
         }
         
         var resultaat : Double?;
@@ -65,14 +56,13 @@ class CalcEngine{
               // Zet getallen terug op de stack
               stack.append(voorlaatsteIngevoerdeGetal)
               stack.append(laatstIngevoerdeGetal)
-              return "error"
+              result = "error"
         }
         
         if let res = resultaat {
             stack.append(res)
-            return "\n\(bewerking) \n\(res)"
+            result += "\n\(bewerking) \n\(res)"
         }
-        return "error"
     }
     
 }

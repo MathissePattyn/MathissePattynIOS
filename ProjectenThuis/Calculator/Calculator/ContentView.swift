@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var calcEngine = CalcEngine();
+    @StateObject var calcEngine = CalcEngine();
     @State private var huidigeInput : String = "";
-    @State private var result : String = "";
+
     var body: some View {
-        VStack{
-            HStack{
+        VStack{         //GEEL
+            HStack{     //BLAUW
                 //teksteditor
-                TextEditor(text: .constant(result))
+                TextEditor(text: $calcEngine.result)
                     .frame(width: 100, height: 350)
                     .border(Color.blue, width: 1)
                     .background(Color.white)
@@ -32,7 +32,7 @@ struct ContentView: View {
                         }
                         WitteKnop(titel: "/"){
 //                            calcEngine.voerBewerkingUit("/")
-                            result += calcEngine.voerBewerkingUit("/") + "\n"
+                            calcEngine.voerBewerkingUit("/")
                         }
                     }
                     GridRow{
@@ -42,7 +42,7 @@ struct ContentView: View {
                             }
                         }
                         WitteKnop(titel: "*"){
-                            result += calcEngine.voerBewerkingUit("*") + "\n"
+                            calcEngine.voerBewerkingUit("*")
                         }
                     }
                     GridRow{
@@ -52,7 +52,7 @@ struct ContentView: View {
                             }
                         }
                         WitteKnop(titel: "-"){
-                            result += calcEngine.voerBewerkingUit("-") + "\n"
+                            calcEngine.voerBewerkingUit("-")
                         }
                     }
                     GridRow{
@@ -72,21 +72,20 @@ struct ContentView: View {
                         
                         
                         WitteKnop(titel: "+"){
-                            result += calcEngine.voerBewerkingUit("+") + "\n"
+                            calcEngine.voerBewerkingUit("+")
                         }
                         
                         
                     }
                     GridRow{
                         WitteKnop(titel: "clear"){
-                            result = calcEngine.clear()
-                            result = "";
+                            calcEngine.clear()
                             
                         }
                         .gridCellColumns(2)
                         WitteKnop(titel: "enter"){
                             
-                            result += calcEngine.enterGetal(huidigeInput)
+                            calcEngine.enterGetal(huidigeInput)
                             huidigeInput="";
                         }
                         .gridCellColumns(2)
@@ -99,7 +98,7 @@ struct ContentView: View {
             .border(Color.yellow, width:1)
             
             WitteKnop(titel: "Show stack") {
-                result += calcEngine.showStack()
+                calcEngine.showStack()
             }
             .frame( alignment: .leading)
             .padding(.leading, 24)
