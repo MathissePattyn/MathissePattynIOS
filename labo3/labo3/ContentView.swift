@@ -15,79 +15,88 @@ struct ContentView: View {
         VStack{
             HStack{
                 TextEditor(text: .constant(calcEngine.result))
-                    .border(Color.red, width: 1)
+//                    .border(Color.red, width: 1)
                     .padding()
                     .frame(width: 100, height: 150)
                 
                 Grid{
                     GridRow{
                         ForEach(7..<10) { number in
-                            Button("\(number)") {
+                            ZwarteKnop(titel: "\(number)"){
                                 huidigeInvoer += "\(number)"
+                                calcEngine.toonCijfer("\(number)")
                             }
+                            .colorInvert()
                         }
-                        Button("*"){
-                            
+                        ZwarteKnop(titel: "*"){
+                            calcEngine.voerBewerkingUit("*")
                         }
+                    
                     }
                     
                     GridRow{
                         ForEach(4..<7) { number in
-                            Button("\(number)") {
+                            ZwarteKnop(titel: "\(number)"){
+                                calcEngine.toonCijfer("\(number)")
                                 huidigeInvoer += "\(number)"
                             }
+                            .colorInvert()
                         }
-                        Button("/"){
-                            
+                        ZwarteKnop(titel: "/"){
+                            calcEngine.voerBewerkingUit("/")
                         }
                     }
                     
                     GridRow{
                         ForEach(1..<4) { number in
-                            Button("\(number)") {
+                            ZwarteKnop(titel: "\(number)"){
+                                calcEngine.toonCijfer("\(number)")
                                 huidigeInvoer += "\(number)"
                             }
+                            .colorInvert()
                         }
-                        Button("-"){
-                            
+                        ZwarteKnop(titel: "-"){
+                            calcEngine.voerBewerkingUit("-")
                         }
                     }
                     
                     GridRow{
                         let number = 0
-                        Button("\(number)"){
+                        ZwarteKnop(titel: "\(number)"){
+                            calcEngine.toonCijfer("\(number)")
                             huidigeInvoer += "\(number)"
                         }
+                        .colorInvert()
                         Text(" ")
                         Text(" ")
-                        Button("+"){
-                            
+                        ZwarteKnop(titel: "+"){
+                            calcEngine.voerBewerkingUit("+")
                         }
                     }
                     
                     GridRow{
-                        Button("Clear"){
-                            
+                        ZwarteKnop(titel: "clear"){
+                            calcEngine.clearStack()
                         }
                         .gridCellColumns(2)
                         
-                        Button("Enter"){
+                        ZwarteKnop(titel: "enter"){
                             calcEngine.enterGetal(huidigeInvoer)
-                            huidigeInvoer = "";
+                            huidigeInvoer=""
                         }
                         .gridCellColumns(2)
                     }
                 }
-                .border(Color.red, width: 1)
+//                .border(Color.red, width: 1)
                 .padding()
             }
-            .border(Color.yellow, width: 1)
+//            .border(Color.yellow, width: 1)
             
-            Button("Show Stack"){
+            ZwarteKnop(titel: "Show Stack"){
                 calcEngine.showStack()
             }
         }
-        .border(Color.yellow, width: 1)
+//        .border(Color.yellow, width: 1)
     }
 }
 
