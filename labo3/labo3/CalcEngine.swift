@@ -47,37 +47,21 @@ import Foundation
 
 
     
-//    func toonCijfer(_ invoer: String) {
-//        // Splits result in regels
-//        var regels = result.components(separatedBy: "\n")
-//        
-//        if regels.isEmpty {
-//            // Geen regels, begin met invoer
-//            regels = [invoer]
-//        } else {
-//            // Voeg cijfer toe aan eerste regel (huidige invoer)
-//            regels[0] += invoer
-//        }
-//        
-//        // Zet de regels weer terug in result
-//        result = regels.joined(separator: "\n")
-//    }
-
     func toonCijfer(_ invoer: String) {
-    
+        
         // Splits result in regels
         var regels = result.components(separatedBy: "\n")
-        // Stap 1: verwijder de hele inhoud van eerste regel (actieve invoer)
-        if !regels.isEmpty {
-            regels[0].removeAll()
+        
+        
+        if regels.isEmpty {
+            // Geen regels, begin met invoer
+            regels = [invoer]
         } else {
-            regels = [""]
+            // Voeg cijfer toe aan eerste regel (huidige invoer)
+            regels[0] += invoer
         }
-
-        // Stap 2: vul de eerste regel opnieuw met alleen het nieuwe cijfer
-        regels[0] = regels[0] + invoer
-
-        // Stap 3: voeg eerste regel en rest samen
+        
+        // Zet de regels weer terug in result
         result = regels.joined(separator: "\n")
     }
 
