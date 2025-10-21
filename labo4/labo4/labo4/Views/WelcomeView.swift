@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    @State var gekozenTeam = ""
-    @EnvironmentObject var dataStore : WKDataStore
+    @Environment(WKDataStore.self) var dataStore
+    @State var gekozenTeam: String?
+    
     
     var body: some View {
         VStack{
@@ -21,49 +22,24 @@ struct WelcomeView: View {
                 .font(Font.largeTitle.bold())
             
             
-            Text("Select your favourite team...")
-            List{
-                ForEach(dataStore.getAllTeams(), id: \.self){ land in
-                    Button("\(land)"){
-                        gekozenTeam = land
-                    }
-                    .listRowBackground(gekozenTeam == land ? Color.blue : Color.clear)
-                    .foregroundColor(Color.black)
-                }
-                
+
+            List(dataStore.getAllTeams(), id:\.self, selection: $gekozenTeam){
+                team in Text(team)
+                    .foregroundColor(team == gekozenTeam ? .red : .primary)
             }
             Spacer()
             
-            if !gekozenTeam.isEmpty {
-                NavigationLink(destination: ResultsView(selectedTeam: gekozenTeam)) {
-                    Text("NEXT")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+            if let gekozenTeam = gekozenTeam{
+                    NavigationLink("Next", destination: ResultsView(selectedTeam: gekozenTeam))
                 }
-            }
-//            if(gekozenTeam != ""){
-//                Button("NEXT"){
-//                    NavigationStack {
-//                        NavigationLink("Start", destination: WelcomeView())
-//                            .navigationTitle("Welkom")
-//                    }
-//                }
-//                
-//            }
+            
+            
         }
     }
 }
 
 
-#Preview {
-//    ContentView()
-//        .environmentObject(WKDataStore())
-    WelcomeView()
-        .environmentObject(WKDataStore())
-}
+
 
 
 

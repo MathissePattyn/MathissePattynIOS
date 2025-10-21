@@ -7,10 +7,13 @@
 
 import Foundation
 import Combine
+import SwiftUI
+import SwiftData
 
-
-class WKDataStore : ObservableObject{
-    @Published var results : [WKResult] = []
+@Observable
+class WKDataStore {
+    
+    var results : [WKResult] = []
     
     init(){
         loadResults()
@@ -28,7 +31,14 @@ class WKDataStore : ObservableObject{
             // Filter uit als het team begint met een cijfer of "To be announced" is
             return !first.isNumber && team != "To be announced"
         }
+        
+        //UNIEKE TEAMS DOOR ER EEN SET VAN TE MAKEN
         return Array(Set(filteredTeams)).sorted()
+    }
+    
+    func getAllStadionsOfAllTeams() -> [String] {
+        let locaties = results.map{ $0.location}
+        return Array(Set(locaties)).sorted()
     }
 
 }

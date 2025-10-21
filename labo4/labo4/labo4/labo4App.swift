@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct labo4App: App {
+    @State var dataScore = WKDataStore()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environment(dataScore)
         }
     }
 }
