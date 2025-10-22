@@ -11,28 +11,18 @@ struct ResultsView: View {
     let selectedTeam : String
     @Environment(WKDataStore.self) var dataStore
     @State var gekozenStadion : String?
+    @State var gekozenMatch : WKResult?
+    let gekozenTeam : String
     
     var body: some View {
         
         NavigationSplitView{
             //Toon de stadiums van het geselecteerde land
-            List(dataStore.getAllStadionsOfAllTeams(), id: \.self, selection: $gekozenStadion){
-                stadion in Text(stadion)
-            }
+            ListStadionView(selectedTeam: selectedTeam, gekozenStadion: $gekozenStadion)
             .navigationTitle("Alle Stadions")
                    } detail: {
-                       // Detail shows the selected stadion or a placeholder text
-                       if let stadion = gekozenStadion {
-                           Text("Gekozen stadion: \(stadion)")
-                               .font(.largeTitle)
-                               .padding()
-                       } else {
-                           Text("Selecteer een stadion")
-                               .foregroundColor(.secondary)
-                       }
+                       ScoreListView(gekozenStadion: $gekozenStadion, gekozenMatch: $gekozenMatch, gekozenTeam: gekozenTeam)
                    }
-//        }
-        
     }
 }
 

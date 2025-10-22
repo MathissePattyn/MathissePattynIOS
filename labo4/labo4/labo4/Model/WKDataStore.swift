@@ -40,6 +40,13 @@ class WKDataStore {
         let locaties = results.map{ $0.location}
         return Array(Set(locaties)).sorted()
     }
+    
+    func getAllResultsByLocation(stadion: String) -> [WKResult]{
+        let filtered_results = results.filter{$0.location == stadion}
+        return filtered_results
+        }
+    
+    }
 
-}
+
 
