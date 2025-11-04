@@ -30,7 +30,7 @@ struct WelcomeView: View {
             Spacer()
             
             if let gekozenTeam = gekozenTeam{
-                    NavigationLink("Next", destination: ResultsView(selectedTeam: gekozenTeam, gekozenTeam: $gekozenTeam))
+                    NavigationLink("Next", destination: ResultsView(selectedTeam: gekozenTeam))
                 }
             
             

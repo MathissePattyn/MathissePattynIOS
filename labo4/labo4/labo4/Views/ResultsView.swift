@@ -12,7 +12,7 @@ struct ResultsView: View {
     @Environment(WKDataStore.self) var dataStore
     @State var gekozenStadion : String?
     @State var gekozenMatch : WKResult?
-    let gekozenTeam : String
+
     
     var body: some View {
         
@@ -21,7 +21,7 @@ struct ResultsView: View {
             ListStadionView(selectedTeam: selectedTeam, gekozenStadion: $gekozenStadion)
             .navigationTitle("Alle Stadions")
                    } detail: {
-                       ScoreListView(gekozenStadion: $gekozenStadion, gekozenMatch: $gekozenMatch, gekozenTeam: gekozenTeam)
+                       ScoreListView(gekozenStadion: $gekozenStadion, gekozenMatch: $gekozenMatch, gekozenTeam: .constant(selectedTeam))
                    }
     }
 }
