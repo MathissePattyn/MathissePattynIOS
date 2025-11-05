@@ -9,10 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        UurroosterListView(gekozenUurrooster:.constant(nil))
+            UurroosterListView()
     }
-}
-
-#Preview {
-    ContentView()
 }

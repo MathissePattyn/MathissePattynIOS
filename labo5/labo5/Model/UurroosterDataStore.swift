@@ -23,6 +23,9 @@ class UurroosterDataStore {
         uurrooster.append(event)
         sort()
     }
+    func getEvents() -> [EventModel] {
+        uurrooster
+    }
     
     func updateEvent(event: EventModel ){
         if let index = uurrooster.firstIndex(where: { $0.id == event.id }) {
@@ -35,7 +38,7 @@ class UurroosterDataStore {
         uurrooster.removeAll(where: { $0.id == id })
     }
     
-    func getEvent(id: String) -> EventModel {
+    func getEvent(id: String) -> EventModel? {
         uurrooster.first(where: { $0.id == id })!
     }
     
