@@ -9,7 +9,6 @@ import SwiftUI
 
 struct UurroosterListView: View{
     @Environment(UurroosterDataStore.self) var dataStore
-//    @State var gekozenUurrooster: EventModel?
     @State var selectedId: String?
     @State var loading = true
     
@@ -37,7 +36,7 @@ struct UurroosterListView: View{
                 }
                 .listStyle(.plain)
                     .toolbar {
-                        NavigationLink(destination: AddModifyEventView(isNewEvent: true) ){
+                        NavigationLink(destination: AddModifyEventView(isNewEvent: true, event: EventModel()) ){
                             Image(systemName: "plus")
                         }
                     
@@ -47,7 +46,7 @@ struct UurroosterListView: View{
                        let uurrooster = dataStore.getEvent(id: id){
                         UurroosterDetailView(uurrooster: uurrooster)
                             .toolbar {
-                                NavigationLink(destination: AddModifyEventView(isNewEvent: true) ){
+                                NavigationLink(destination: AddModifyEventView(isNewEvent: false, event: uurrooster )){
                                     Image(systemName: "plus")
                                 }
                             }
