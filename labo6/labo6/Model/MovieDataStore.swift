@@ -12,7 +12,7 @@ class MovieDataStore {
     private var movies = Movies()
     
     init(){
-        movies = Movies()
+
        
     }
     
@@ -44,14 +44,13 @@ class MovieDataStore {
             print("⏳ Simulating 2-second load delay...")
             try await Task.sleep(for: .seconds(2)) // Simulate long load
             // load movies
-            let data : Movies = load("movies.json")
-            movies = data;
+             movies = load("movies.json")
             // sort
             sort();
             print("✅ Data loaded successfully.")
             
         } catch {
-            print("❌ Failed to load uurrooster:", error)
+            print("❌ Failed to load movies:", error)
             //movies is lege array
             movies = Movies()
         }
