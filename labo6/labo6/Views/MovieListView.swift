@@ -25,20 +25,21 @@ struct MovieListView: View {
                             Text(movie.title)
                             Text(movie.description)
                         }
-//                        NavigationLink("Actors", value: Route.actor())
-//                        NavigationLink("Director", value: Route.director())
+                    }
+                }
+                .navigationDestination(for: Route.self) { route in
+                    switch route {
+                    case let .actor(actor):
+                        ActorView(actor: actor)
+                        
+                    case let .director(director):
+                        DirectorView(director: director)
+                    case let .movie(movie):
+                        MovieView(movie : movie)
                     }
                 }
             }
         }
-        .navigationDestination(for: Route.self) { route in
-            switch route {
-            case let .actor(actor):
-                ActorView(actor: actor)
-                
-            case let .director(director):
-                DirectorView(director: director)
-            }
-        }
+       
     }
 }
