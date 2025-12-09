@@ -1,18 +1,18 @@
 //
-//  ArtistView.swift
+//  ArtworkDetailView.swift
 //  labo7
 //
-//  Created by Mathisse Pattyn on 03/12/2025.
+//  Created by Mathisse Pattyn on 09/12/2025.
 //
 
 import SwiftUI
 
-struct ArtistView: View {
+struct ArtworkDetailView: View {
+    
+    var artwork : Artwork
+    
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
-#Preview {
-    ArtistView()
-}

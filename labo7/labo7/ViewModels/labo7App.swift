@@ -11,10 +11,13 @@ import SwiftUI
 struct labo7App: App {
 
     @State var galleryData = GalleryData()
+    @State var pathStore = PathStore()
     
     var body: some Scene {
         WindowGroup {
-            ContentView().environment(galleryData)
+            ContentView()
+                .environment(galleryData)
+                .environment(pathStore)
         }
     }
 }
