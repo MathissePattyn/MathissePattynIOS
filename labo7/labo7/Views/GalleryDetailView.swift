@@ -16,6 +16,7 @@ struct GalleryDetailView: View {
     
     var body: some View {
         @Bindable var pathStore = pathStore
+        
         NavigationStack(path: $pathStore.path){
         if let gallery = gallery{
             VStack{
@@ -23,12 +24,17 @@ struct GalleryDetailView: View {
                     .font(Font.largeTitle)
                     .foregroundStyle(Color.brown)
                 Divider()
+                    .frame(minHeight: 3)
+                    .overlay(Color.brown)
                 VStack{
                     Text(gallery.location)
                         .bold()
                     Text(gallery.description)
+                        .foregroundStyle(Color.gray)
                 }
                 Divider()
+                    .frame(minHeight: 3)
+                    .overlay(Color.brown)
                     VStack{
                         Text("List of artists")
                         List(galleryData.getArtistsFromGallery(gallery: gallery), id: \.self){
@@ -38,6 +44,7 @@ struct GalleryDetailView: View {
                                         .bold()
                                         .foregroundStyle(Color.brown)
                                     Text(artist.nationality)
+                                        .foregroundStyle(Color.gray)
                                 }
                             }
                         }

@@ -20,6 +20,8 @@ struct ArtistDetailView: View {
                 .font(Font.largeTitle)
                 .foregroundStyle(Color.brown)
             Divider()
+                .frame(minHeight: 3)
+                .overlay(Color.brown)
             VStack{
                 Text(artist.nationality)
                 Text(artist.style)
@@ -27,9 +29,22 @@ struct ArtistDetailView: View {
                 Text(artist.description)
                     .foregroundStyle(Color.gray)
             }
+            Divider()
+                .frame(minHeight: 3)
+                .overlay(Color.brown)
             VStack{
                 Text("List of art")
-                List(
+                List(galleryData.getArtworksFromArtist(artist: artist), id: \.self){
+                    artwork in NavigationLink(value: Destination.artwork(artwork)){
+                        VStack{
+                            Text(artwork.title)
+                                .bold()
+                                .foregroundStyle(Color.brown)
+                            Text(artwork.description)
+                                .foregroundStyle(Color.gray)
+                        }
+                    }
+                }
             }
         }
     }

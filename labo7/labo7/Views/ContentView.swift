@@ -10,14 +10,24 @@ import SwiftUI
 struct ContentView: View {
 
     @State var selectedGallery : Gallery? = nil
+    @Environment(GalleryData.self) var galleryData
+    @State var loading = true
     
     var body: some View {
-        TabView(){
-            Tab("Galeries", systemImage: "photo.on.rectangle"){
-                GalleriesView(selectedGallery: $selectedGallery)
-            }
-            Tab("\(selectedGallery?.name ?? "No galleries")", systemImage: "photo.on.rectangle"){
-                GalleryDetailView(gallery: selectedGallery)
+        if loading{
+            ProgressView("loading...")
+                .task {
+                    await galleryData.loadData()
+                    loading = false
+                }
+        } else {
+            TabView(){
+                Tab("Galeries", systemImage: "photo.on.rectangle"){
+                    GalleriesView(selectedGallery: $selectedGallery)
+                }
+                Tab("\(selectedGallery?.name ?? "No galleries")", systemImage: "photo.on.rectangle"){
+                    GalleryDetailView(gallery: selectedGallery)
+                }
             }
         }
     }

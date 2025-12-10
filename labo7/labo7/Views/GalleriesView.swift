@@ -10,18 +10,10 @@ import SwiftUI
 struct GalleriesView: View {
     @Environment(GalleryData.self) var galleryData
     @Environment(PathStore.self) var pathStore
-    @State var loading = true
     @Binding var selectedGallery : Gallery?
     
     var body: some View {
 
-        if loading{
-            ProgressView("Loading...")
-                .task {
-                    await galleryData.loadData()
-                    loading = false
-                }
-        } else{
                 List(galleryData.getAllGalleries(), id: \.self, selection: $selectedGallery){
                     gallery in
                         VStack{
@@ -31,12 +23,14 @@ struct GalleriesView: View {
                             Text(gallery.location)
                             Text(gallery.description)
                                 .foregroundStyle(Color.gray)
+                                .lineLimit(1)
+                                .truncationMode(.tail)
                             Divider()
                         
                     }
                 }
             }
         }
-    }
+
 
 
