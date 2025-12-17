@@ -8,11 +8,26 @@
 import SwiftUI
 
 struct GalleriesView: View {
+    
+    @Environment(GalleryData.self) var galleryData : GalleryData
+    
+    @Binding var gallery : Gallery?
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(galleryData.getGalleries(), id: \.self, selection: $gallery){
+            gallery in
+            VStack{
+                Text(gallery.name)
+                    .font(Font.largeTitle.bold())
+                    .foregroundStyle(Color.brown)
+                Text(gallery.location)
+                    .bold()
+                Text(gallery.description)
+                    .foregroundStyle(Color.gray)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+            }
+        }
     }
 }
 
-#Preview {
-    GalleriesView()
-}

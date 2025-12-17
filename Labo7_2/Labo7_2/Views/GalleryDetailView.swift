@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct GalleryDetailView: View {
+    var gallery : Gallery?
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        if let gallery = gallery{
+            VStack{
+                Text(gallery.name)
+                    .font(Font.largeTitle.bold())
+                    .foregroundStyle(Color.brown)
+            }
+        } else {
+            Text("Selecteer een gallery")
+        }
     }
 }
 
-#Preview {
-    GalleryDetailView()
-}
